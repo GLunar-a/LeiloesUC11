@@ -31,6 +31,7 @@ public class ProdutosDAO {
            JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!!");
         } catch (SQLException e){
             System.out.println("Erro ao inserir empresa: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao realizar cadastro.");
         }
     }
     
@@ -58,6 +59,19 @@ public class ProdutosDAO {
        
         
         
+    }
+    
+    public void venderProduto(ProdutosDTO produto){
+        String sql = "UPDATE produtos SET status=? WHERE id=?";
+        try{
+           prep = this.conn.prepareStatement(sql);
+           prep.setString(1, produto.getStatus());
+           prep.setInt(2, produto.getId());
+           prep.execute();
+           
+        } catch (SQLException e){
+            System.out.println("Erro ao atualizar venda: " + e.getMessage());
+        }
     }
     
     
